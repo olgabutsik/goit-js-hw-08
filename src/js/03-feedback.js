@@ -23,14 +23,14 @@ function dataFromLS() {
 dataFromLS();
 
 function onClickForm(e) {
-  const { target } = e;
-  const inputValue = target.value;
-  const userName = target.name;
   const userDataFromLSG = JSON.parse(
     localStorage.getItem('feedback-form-state')
   );
 
-   userData[userName] = inputValue;
+  const userData = {
+    email: formEl.email.value,
+    message: formEl.message.value
+   }
   
 
   localStorage.setItem('feedback-form-state', JSON.stringify(userData));
