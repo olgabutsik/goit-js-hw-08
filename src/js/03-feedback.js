@@ -1,40 +1,21 @@
 const throttle = require('lodash.throttle');
 
 const formEl = document.querySelector('.feedback-form');
-const userData = {};
+const userData = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
 
 function dataFromLS() {
-  try {
-    const userDataFromLS = JSON.parse(
-      localStorage.getItem('feedback-form-state')
-    );
-    if (!userDataFromLS) {
-      return;
-    }
-    console.log(userDataFromLS);
-    for (const item in userDataFromLS) {
-      console.log(item);
-      formEl.elements[item].value = userDataFromLS[item];
-    }
-  } catch (err) {
-    console.log(err);
+  for (const item in userData) {
+    formEl.elements[item].value = userData[item];
   }
 }
 dataFromLS();
 
 function onClickForm(e) {
-  const userDataFromLSG = JSON.parse(
-    localStorage.getItem('feedback-form-state')
-  );
-
-  const userData = {
+    const userData = {
     email: formEl.email.value,
     message: formEl.message.value
    }
-  
-
   localStorage.setItem('feedback-form-state', JSON.stringify(userData));
-  JSON.parse(localStorage.getItem('feedback-form-state'));
 }
 
 function onClickSubmitBtn(e) {
